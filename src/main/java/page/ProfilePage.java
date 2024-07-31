@@ -1,2 +1,4 @@
-package page;public class ProfilePage {
+package page;
+
+public class ProfilePage {
 }

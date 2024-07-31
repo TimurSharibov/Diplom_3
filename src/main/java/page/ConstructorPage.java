@@ -1,2 +1,4 @@
-package page;public class ConstructorPage {
+package page;
+
+public class ConstructorPage {
 }

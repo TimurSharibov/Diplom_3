@@ -1,2 +1,4 @@
-package page;public class RegisterPage {
+package page;
+
+public class RegisterPage {
 }

@@ -64,6 +64,24 @@ public class OpenProfileTest {
         boolean orderButtonDisplayed = constructorPage.isOrderButtonDisplayed();
         assertTrue(orderButtonDisplayed);
     }
+
+    @Test
+    public void LogoutFromProfilePage() {
+
+        ConstructorPage constructorPage = new ConstructorPage(webDriver);
+
+        constructorPage.clickProfileButton();
+
+        new WebDriverWait(webDriver, ofSeconds(10)).until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/account/profile"));
+        ProfilePage profilePage = new ProfilePage(webDriver);
+        profilePage.clickLogoutButton();
+
+        new WebDriverWait(webDriver, ofSeconds(20)).until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/login"));
+
+        LoginPage loginPage = new LoginPage(webDriver);
+        boolean loginButtonDisplayed = loginPage.isLoginButtonDisplayed();
+        assertTrue(loginButtonDisplayed);
+    }
     @After
     public void tearDown() {
         webDriver.quit();

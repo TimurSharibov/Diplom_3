@@ -13,6 +13,7 @@ public class ProfilePage {
 
     private static By profileTextLocator = By.xpath("//a[text()='Профиль']");
     private static By constructorButtonLocator = By.xpath("//p[text()='Конструктор']");
+    private static By logoutButtonLocator = By.xpath("//button[text()='Выход']");
     public ProfilePage(WebDriver webDriver) {
         this.webDriver = webDriver;
     }
@@ -30,5 +31,12 @@ public class ProfilePage {
         new WebDriverWait(webDriver, ofSeconds(5))
                 .until(ExpectedConditions.elementToBeClickable(constructorButton));
         constructorButton.click();
+    }
+
+    public void clickLogoutButton() {
+        WebElement logoutButton = webDriver.findElement(logoutButtonLocator);
+        new WebDriverWait(webDriver, ofSeconds(5))
+                .until(ExpectedConditions.elementToBeClickable(logoutButton));
+        logoutButton.click();
     }
 }

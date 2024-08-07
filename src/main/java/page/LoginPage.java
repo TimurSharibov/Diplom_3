@@ -12,6 +12,8 @@ public class LoginPage {
     private final WebDriver webDriver;
 
     private By loginButtonLocator = By.xpath("//button[text()='Войти']");
+    private By emailInputLocator = By.xpath("//label[text()='Email']/following-sibling::input");
+    private By passwordInputLocator = By.xpath("//input[@type='password' and @name='Пароль']");
 
 
 
@@ -19,6 +21,20 @@ public class LoginPage {
         this.webDriver = webDriver;
     }
 
+
+    public void enterEmail(String userEmail) {
+        WebElement emailInput = webDriver.findElement(emailInputLocator);
+        new WebDriverWait(webDriver, ofSeconds(5))
+                .until(ExpectedConditions.visibilityOf(emailInput));
+        emailInput.sendKeys(userEmail);
+    }
+
+    public void enterPassword(String userPassword) {
+        WebElement passwordInput = webDriver.findElement(passwordInputLocator);
+        new WebDriverWait(webDriver, ofSeconds(5))
+                .until(ExpectedConditions.visibilityOf(passwordInput));
+        passwordInput.sendKeys(userPassword);
+    }
     public void clickLoginButton() {
         WebElement loginButton = webDriver.findElement(loginButtonLocator);
         new WebDriverWait(webDriver, ofSeconds(5))

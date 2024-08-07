@@ -1,66 +1,58 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
-import junit.framework.TestCase;
-import org.junit.Before;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.Test;
-
 import org.junit.After;
 import org.junit.Before;
-//import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-//import java.WebDriverFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import page.ConstructorPage;
 import page.LoginPage;
 import page.RegistrationPage;
 
 
+import static Utils.DataGenerator.getRandomEmail;
+import static java.time.Duration.ofSeconds;
 import static org.junit.Assert.assertTrue;
 
-import static java.time.Duration.ofSeconds;
-
-
-
 public class RegistrationTest {
-
     private static final String BROUSER = "chrome";
     private WebDriver webDriver;
+
+    private String email = getRandomEmail();
+
 
     @Before
     public void setup() {
         webDriver = WebDriverFactory.getWebDriver(BROUSER);
         webDriver.get("https://stellarburgers.nomoreparties.site/register");
     }
-
-
-
     @Test
-    public void Registration() {
+    public void RegistrationWithCorrectData() {
         RegistrationPage registrationPage = new RegistrationPage(webDriver);
 
+
         registrationPage.enterName("Tim");
-        registrationPage.enterEmail("tim@mail.ru");
+        registrationPage.enterEmail(email);
         registrationPage.enterPassword("password123");
         registrationPage.clickRegistrationButton();
 
+        new WebDriverWait(webDriver, ofSeconds(10)).until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/login"));
+
         LoginPage loginPage = new LoginPage(webDriver);
+        loginPage.enterEmail(email);
+        loginPage.enterPassword("password123");
         loginPage.clickLoginButton();
-        // Ожидание перехода на страницу после регистрации, можно заменить если требуется
-        new WebDriverWait(webDriver, ofSeconds(10)).until(ExpectedConditions.urlContains("someExpectedURL"));
+
+
+        new WebDriverWait(webDriver, ofSeconds(20)).until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/"));
 
         ConstructorPage constructorPage = new ConstructorPage(webDriver);
         // Проверка наличия кнопки "Оформить заказ"
-        boolean isOrderButtonDisplayed = constructorPage.isOrderButtonDisplayed();
-        assertTrue(isOrderButtonDisplayed);
+        boolean orderButtonDisplayed = constructorPage.isOrderButtonDisplayed();
+        assertTrue(orderButtonDisplayed);
     }
 
     @Test
-    public void PasswordError() {
+    public void RegistrationWithIncorrectPassword() {
         RegistrationPage registrationPage = new RegistrationPage(webDriver);
 
         registrationPage.enterName("Tim");
@@ -73,10 +65,9 @@ public class RegistrationTest {
     }
 
 
+
     @After
     public void tearDown() {
-            webDriver.quit();
+        webDriver.quit();
     }
-
-
 }

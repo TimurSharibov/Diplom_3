@@ -1,3 +1,4 @@
+import io.qameta.allure.Step;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,6 +26,7 @@ public class ConstructorTest {
     }
 
     @Test
+    @Step ("Переход во вкладку Начинки")
     public void GoToFilling() {
         ConstructorPage constructorPage = new ConstructorPage(webDriver);
         constructorPage.clickFillingButton();
@@ -35,6 +37,7 @@ public class ConstructorTest {
     }
 
     @Test
+    @Step ("Переход во вкладку Соусы")
     public void GoToSauces() {
         ConstructorPage constructorPage = new ConstructorPage(webDriver);
         constructorPage.clickSaucesButton();
@@ -45,6 +48,7 @@ public class ConstructorTest {
     }
 
     @Test
+    @Step ("Переход во вкладку Булки")
     public void GoToBuns() {
         ConstructorPage constructorPage = new ConstructorPage(webDriver);
         constructorPage.clickFillingButton();
@@ -55,6 +59,7 @@ public class ConstructorTest {
 
     }
     @Test
+    @Step ("Переход по всем вкладкам")
     public void GoToFillingSaucesBuns() {
         ConstructorPage constructorPage = new ConstructorPage(webDriver);
         constructorPage.clickSaucesButton();

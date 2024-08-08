@@ -1,3 +1,6 @@
+package test;
+
+import utils.WebDriverFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,14 +11,7 @@ import page.ConstructorPage;
 import page.LoginPage;
 import page.RegistrationPage;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.net.http.HttpRequest.BodyPublishers;
-
-import static Utils.DataGenerator.getRandomEmail;
+import static utils.DataGenerator.getRandomEmail;
 import static java.time.Duration.ofSeconds;
 import static org.junit.Assert.assertTrue;
 

@@ -1,13 +1,14 @@
+package test;
+
+//import utils.WebDriverFactory;
 import io.qameta.allure.Step;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import page.ConstructorPage;
+import utils.WebDriverFactory;
 
-import static java.time.Duration.ofSeconds;
 import static org.junit.Assert.assertTrue;
 
 public class ConstructorTest {
@@ -22,7 +23,7 @@ public class ConstructorTest {
     }
 
     @Test
-    @Step("Переход во вкладку Начинки")
+    @Step("РџРµСЂРµС…РѕРґ РІРѕ РІРєР»Р°РґРєСѓ РќР°С‡РёРЅРєРё")
     public void goToFilling() {
         ConstructorPage constructorPage = new ConstructorPage(webDriver);
         constructorPage.clickFillingButton();
@@ -32,7 +33,7 @@ public class ConstructorTest {
     }
 
     @Test
-    @Step("Переход во вкладку Соусы")
+    @Step("РџРµСЂРµС…РѕРґ РІРѕ РІРєР»Р°РґРєСѓ РЎРѕСѓСЃС‹")
     public void goToSauces() {
         ConstructorPage constructorPage = new ConstructorPage(webDriver);
         constructorPage.clickSaucesButton();
@@ -42,7 +43,7 @@ public class ConstructorTest {
     }
 
     @Test
-    @Step("Переход во вкладку Булки")
+    @Step("РџРµСЂРµС…РѕРґ РІРѕ РІРєР»Р°РґРєСѓ Р‘СѓР»РєРё")
     public void goToBuns() {
         ConstructorPage constructorPage = new ConstructorPage(webDriver);
         constructorPage.clickFillingButton();
@@ -53,7 +54,7 @@ public class ConstructorTest {
     }
 
     @Test
-    @Step("Переход по всем вкладкам")
+    @Step("РџРµСЂРµС…РѕРґ РїРѕ РІСЃРµРј РІРєР»Р°РґРєР°Рј")
     public void goToFillingSaucesBuns() {
         ConstructorPage constructorPage = new ConstructorPage(webDriver);
         constructorPage.clickSaucesButton();

@@ -5,5 +5,10 @@
     <file url="file://$PROJECT_DIR$/src/main/java/page/RegistrationTest.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/test/java/RegistrationTest.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/test/java/page/ConstructorPage.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/test/java/page/ForgotPasswordPage.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/test/java/page/LoginPage.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/test/java/page/ProfilePage.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/test/java/page/RegistrationPage.java" charset="UTF-8" />
   </component>
 </project>

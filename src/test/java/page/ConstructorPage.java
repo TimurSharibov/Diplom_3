@@ -1,4 +1,6 @@
 package page;
+
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -22,13 +24,11 @@ public class ConstructorPage {
     private By saucesTextLocator = By.xpath("//h2[text()='Соусы']");
     private By bunsTextLocator = By.xpath("//h2[text()='Булки']");
 
-
-
-
     public ConstructorPage(WebDriver webDriver) {
         this.webDriver = webDriver;
     }
 
+    @Step("Проверка отображения кнопки 'Оформить заказ'")
     public boolean isOrderButtonDisplayed() {
         try {
             return webDriver.findElement(orderButtonLocator).isDisplayed();
@@ -36,6 +36,8 @@ public class ConstructorPage {
             return false;
         }
     }
+
+    @Step("Клик по кнопке 'Войти в аккаунт'")
     public static void clickLoginToAccountButton() {
         WebElement loginToAccountButton = webDriver.findElement(loginToAccountButtonLocator);
         new WebDriverWait(webDriver, ofSeconds(5))
@@ -43,6 +45,7 @@ public class ConstructorPage {
         loginToAccountButton.click();
     }
 
+    @Step("Клик по кнопке 'Личный Кабинет'")
     public static void clickProfileButton() {
         WebElement profileButton = webDriver.findElement(profileButtonLocator);
         new WebDriverWait(webDriver, ofSeconds(5))
@@ -50,7 +53,7 @@ public class ConstructorPage {
         profileButton.click();
     }
 
-
+    @Step("Клик по кнопке 'Начинки'")
     public void clickFillingButton() {
         WebElement fillingButton = webDriver.findElement(fillingButtonLocator);
         new WebDriverWait(webDriver, ofSeconds(5))
@@ -58,6 +61,7 @@ public class ConstructorPage {
         fillingButton.click();
     }
 
+    @Step("Клик по кнопке 'Соусы'")
     public void clickSaucesButton() {
         WebElement saucesButton = webDriver.findElement(saucesButtonLocator);
         new WebDriverWait(webDriver, ofSeconds(5))
@@ -65,6 +69,7 @@ public class ConstructorPage {
         saucesButton.click();
     }
 
+    @Step("Клик по кнопке 'Булки'")
     public void clickBunsButton() {
         WebElement bunsButton = webDriver.findElement(bunsButtonLocator);
         new WebDriverWait(webDriver, ofSeconds(10))
@@ -72,6 +77,7 @@ public class ConstructorPage {
         bunsButton.click();
     }
 
+    @Step("Проверка отображения текста 'Начинки'")
     public boolean isFillingTextDisplayed() {
         try {
             return webDriver.findElement(fillingTextLocator).isDisplayed();
@@ -80,6 +86,7 @@ public class ConstructorPage {
         }
     }
 
+    @Step("Проверка отображения текста 'Соусы'")
     public boolean isSaucesTextDisplayed() {
         try {
             return webDriver.findElement(saucesTextLocator).isDisplayed();
@@ -88,6 +95,7 @@ public class ConstructorPage {
         }
     }
 
+    @Step("Проверка отображения текста 'Булки'")
     public boolean isBunsTextDisplayed() {
         try {
             return webDriver.findElement(bunsTextLocator).isDisplayed();

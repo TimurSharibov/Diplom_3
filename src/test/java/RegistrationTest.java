@@ -67,7 +67,7 @@ public class RegistrationTest {
         registrationPage.enterPassword("p123");
         registrationPage.clickRegistrationButton();
 
-        boolean answerIsDisplayed = registrationPage.errorTextIsDisplayed("Некорректный пароль");
+        boolean answerIsDisplayed = registrationPage.isIncorrectPasswordErrorDisplayed("Некорректный пароль");
         assertTrue(answerIsDisplayed);
     }
 

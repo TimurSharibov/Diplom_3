@@ -46,7 +46,8 @@ public class ConstructorTest {
     @Step("Переход во вкладку Булки")
     public void goToBuns() {
         ConstructorPage constructorPage = new ConstructorPage(webDriver);
-        constructorPage.clickFillingButton();
+        constructorPage.clickSaucesButton();
+//        constructorPage.clickFillingButton();
         constructorPage.clickBunsButton();
 
         boolean bunsTextDisplayed = constructorPage.isBunsTextDisplayed();

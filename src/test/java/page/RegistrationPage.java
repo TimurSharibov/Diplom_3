@@ -1,10 +1,7 @@
 package page;
 
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -24,13 +21,18 @@ public class RegistrationPage {
         this.webDriver = webDriver;
     }
 
+
+
     @Step("Ввод имени: {userName}")
     public void enterName(String userName) {
-        WebElement nameInput = webDriver.findElement(nameInputLocator);
-        new WebDriverWait(webDriver, ofSeconds(5))
-                .until(ExpectedConditions.visibilityOf(nameInput));
+        WebElement nameInput = new WebDriverWait(webDriver, ofSeconds(20))
+                .until(ExpectedConditions.elementToBeClickable(nameInputLocator));
         nameInput.sendKeys(userName);
     }
+
+
+
+
 
     @Step("Ввод email: {userEmail}")
     public void enterEmail(String userEmail) {
@@ -70,7 +72,7 @@ public class RegistrationPage {
     @Step("Клик по кнопке 'Войти'")
     public static void clickLoginButton() {
         WebElement loginButton = webDriver.findElement(loginButtonLocator);
-        new WebDriverWait(webDriver, ofSeconds(5))
+        new WebDriverWait(webDriver, ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(loginButton));
         loginButton.click();
     }

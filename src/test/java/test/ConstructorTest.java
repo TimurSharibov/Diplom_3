@@ -2,6 +2,7 @@ package test;
 
 //import utils.WebDriverFactory;
 import io.qameta.allure.Step;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,19 +12,12 @@ import utils.WebDriverFactory;
 
 import static org.junit.Assert.assertTrue;
 
-public class ConstructorTest {
+public class ConstructorTest extends BaseTest {
 
-    private static final String BROWSER = "chrome";
-    private WebDriver webDriver;
 
-    @Before
-    public void setup() {
-        webDriver = WebDriverFactory.getWebDriver(BROWSER);
-        webDriver.get("https://stellarburgers.nomoreparties.site");
-    }
 
     @Test
-    @Step("Переход во вкладку Начинки")
+    @DisplayName("Переход во вкладку Начинки")
     public void goToFilling() {
         ConstructorPage constructorPage = new ConstructorPage(webDriver);
         constructorPage.clickFillingButton();
@@ -33,7 +27,7 @@ public class ConstructorTest {
     }
 
     @Test
-    @Step("Переход во вкладку Соусы")
+    @DisplayName("Переход во вкладку Соусы")
     public void goToSauces() {
         ConstructorPage constructorPage = new ConstructorPage(webDriver);
         constructorPage.clickSaucesButton();
@@ -43,7 +37,7 @@ public class ConstructorTest {
     }
 
     @Test
-    @Step("Переход во вкладку Булки")
+    @DisplayName("Переход во вкладку Булки")
     public void goToBuns() {
         ConstructorPage constructorPage = new ConstructorPage(webDriver);
         constructorPage.clickSaucesButton();
@@ -55,7 +49,7 @@ public class ConstructorTest {
     }
 
     @Test
-    @Step("Переход по всем вкладкам")
+    @DisplayName("Переход по всем вкладкам")
     public void goToFillingSaucesBuns() {
         ConstructorPage constructorPage = new ConstructorPage(webDriver);
         constructorPage.clickSaucesButton();
@@ -66,8 +60,4 @@ public class ConstructorTest {
         assertTrue(bunsTextDisplayed);
     }
 
-    @After
-    public void tearDown() {
-        webDriver.quit();
-    }
 }

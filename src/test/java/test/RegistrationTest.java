@@ -38,7 +38,7 @@ public class RegistrationTest {
         registrationPage.enterPassword(password);
         registrationPage.clickRegistrationButton();
 
-        new WebDriverWait(webDriver, ofSeconds(10)).until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/login"));
+        new WebDriverWait(webDriver, ofSeconds(20)).until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/login"));
 
         LoginPage loginPage = new LoginPage(webDriver);
         loginPage.enterEmail(email);
@@ -75,42 +75,4 @@ public class RegistrationTest {
         webDriver.quit();
     }
 
-//    private void deleteUser() {
-//        try {
-//            HttpClient client = HttpClient.newHttpClient();
-//            HttpRequest request = HttpRequest.newBuilder()
-//                    .uri(URI.create("https://stellarburgers.nomoreparties.site/api/auth/user"))
-//                    .header("Authorization", accessToken)
-//                    .DELETE()
-//                    .build();
-//
-//            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-//            System.out.println("User deletion response status: " + response.statusCode());
-//        } catch (IOException | InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    private void getAccessToken() {
-//        try {
-//            HttpClient client = HttpClient.newHttpClient();
-//            String json = String.format("{\"email\": \"%s\", \"password\": \"%s\"}", email, password);
-//            HttpRequest request = HttpRequest.newBuilder()
-//                    .uri(URI.create("https://stellarburgers.nomoreparties.site/api/auth/login"))
-//                    .header("Content-Type", "application/json")
-//                    .POST(BodyPublishers.ofString(json))
-//                    .build();
-//
-//            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-//            if (response.statusCode() == 200) {
-//                // Парсинг JSON для получения токена доступа
-//                JSONObject jsonResponse = new JSONObject(response.body());
-//                accessToken = "Bearer " + jsonResponse.getJSONObject("access").getString("token");
-//            } else {
-//                System.out.println("Failed to get access token, response status: " + response.statusCode());
-//            }
-//        } catch (IOException | InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }

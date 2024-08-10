@@ -1,50 +1,25 @@
 package test;
 
-import utils.WebDriverFactory;
-import org.junit.After;
-import org.junit.Before;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import page.ConstructorPage;
 import page.ForgotPasswordPage;
 import page.LoginPage;
 import page.RegistrationPage;
 
-
-import static utils.DataGenerator.getRandomEmail;
 import static java.time.Duration.ofSeconds;
 import static org.junit.Assert.assertTrue;
 
-public class LoginTest {
-    private static final String BROUSER = "chrome";
-    private WebDriver webDriver;
+public class LoginTest extends BaseTest {
 
-    private String email = getRandomEmail();
-
-
-    @Before
-    public void setup() {
-        webDriver = WebDriverFactory.getWebDriver(BROUSER);
-        webDriver.get("https://stellarburgers.nomoreparties.site");
-    }
     @Test
+//    @DisplayName
     public void LoginFromHomePage() {
         ConstructorPage constructorPage = new ConstructorPage(webDriver);
+        constructorPage.clickLoginToAccountButton();
+        login("ordersuser@example.com", "password123");
 
-        ConstructorPage.clickLoginToAccountButton();
-
-        new WebDriverWait(webDriver, ofSeconds(10)).until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/login"));
-
-        LoginPage loginPage = new LoginPage(webDriver);
-        loginPage.enterEmail("ordersuser@example.com");
-        loginPage.enterPassword("password123");
-        loginPage.clickLoginButton();
-
-        new WebDriverWait(webDriver, ofSeconds(20)).until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/"));
-
-        // Проверка наличия кнопки "Оформить заказ"
         boolean orderButtonDisplayed = constructorPage.isOrderButtonDisplayed();
         assertTrue(orderButtonDisplayed);
     }
@@ -52,19 +27,9 @@ public class LoginTest {
     @Test
     public void LoginFromProfile() {
         ConstructorPage constructorPage = new ConstructorPage(webDriver);
+        constructorPage.clickProfileButton();
+        login("ordersuser@example.com", "password123");
 
-        ConstructorPage.clickProfileButton();
-
-        new WebDriverWait(webDriver, ofSeconds(10)).until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/login"));
-
-        LoginPage loginPage = new LoginPage(webDriver);
-        loginPage.enterEmail("ordersuser@example.com");
-        loginPage.enterPassword("password123");
-        loginPage.clickLoginButton();
-
-        new WebDriverWait(webDriver, ofSeconds(20)).until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/"));
-
-        // Проверка наличия кнопки "Оформить заказ"
         boolean orderButtonDisplayed = constructorPage.isOrderButtonDisplayed();
         assertTrue(orderButtonDisplayed);
     }
@@ -73,52 +38,23 @@ public class LoginTest {
     public void LoginFromRegistrationPage() {
         webDriver.get("https://stellarburgers.nomoreparties.site/register");
         RegistrationPage registrationPage = new RegistrationPage(webDriver);
+        registrationPage.clickLoginButton();
+        login("ordersuser@example.com", "password123");
 
-        RegistrationPage.clickLoginButton();
-
-        new WebDriverWait(webDriver, ofSeconds(10)).until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/login"));
-
-        LoginPage loginPage = new LoginPage(webDriver);
-        loginPage.enterEmail("ordersuser@example.com");
-        loginPage.enterPassword("password123");
-        loginPage.clickLoginButton();
-
-        new WebDriverWait(webDriver, ofSeconds(20)).until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/"));
-
-        // Проверка наличия кнопки "Оформить заказ"
         ConstructorPage constructorPage = new ConstructorPage(webDriver);
         boolean orderButtonDisplayed = constructorPage.isOrderButtonDisplayed();
         assertTrue(orderButtonDisplayed);
     }
 
     @Test
-
     public void LoginFromPasswordRecovery() {
         webDriver.get("https://stellarburgers.nomoreparties.site/forgot-password");
-
         ForgotPasswordPage forgotPasswordPage = new ForgotPasswordPage(webDriver);
-
         forgotPasswordPage.clickLoginButton();
+        login("ordersuser@example.com", "password123");
 
-        new WebDriverWait(webDriver, ofSeconds(10)).until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/login"));
-
-        LoginPage loginPage = new LoginPage(webDriver);
-        loginPage.enterEmail("ordersuser@example.com");
-        loginPage.enterPassword("password123");
-        loginPage.clickLoginButton();
-
-        new WebDriverWait(webDriver, ofSeconds(20)).until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/"));
-
-        // Проверка наличия кнопки "Оформить заказ"
         ConstructorPage constructorPage = new ConstructorPage(webDriver);
         boolean orderButtonDisplayed = constructorPage.isOrderButtonDisplayed();
         assertTrue(orderButtonDisplayed);
-    }
-
-
-
-    @After
-    public void tearDown() {
-        webDriver.quit();
     }
 }

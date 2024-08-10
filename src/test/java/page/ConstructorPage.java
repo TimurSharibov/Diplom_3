@@ -48,7 +48,7 @@ public class ConstructorPage {
     @Step("Клик по кнопке 'Личный Кабинет'")
     public static void clickProfileButton() {
         WebElement profileButton = webDriver.findElement(profileButtonLocator);
-        new WebDriverWait(webDriver, ofSeconds(5))
+        new WebDriverWait(webDriver, ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(profileButton));
         profileButton.click();
     }

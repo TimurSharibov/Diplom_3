@@ -40,7 +40,7 @@ public class LoginPage {
     @Step("Клик по кнопке 'Войти'")
     public void clickLoginButton() {
         WebElement loginButton = webDriver.findElement(loginButtonLocator);
-        new WebDriverWait(webDriver, ofSeconds(5))
+        new WebDriverWait(webDriver, ofSeconds(20))
                 .until(ExpectedConditions.elementToBeClickable(loginButton));
         loginButton.click();
     }

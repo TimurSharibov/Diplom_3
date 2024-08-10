@@ -1,67 +1,46 @@
 package test;
 
-import utils.WebDriverFactory;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import page.*;
-
+import page.ConstructorPage;
+import page.LoginPage;
+import page.ProfilePage;
 
 import static java.time.Duration.ofSeconds;
 import static org.junit.Assert.assertTrue;
 
-public class OpenProfileTest {
-    private static final String BROUSER = "chrome";
-    private WebDriver webDriver;
-
+public class OpenProfileTest extends BaseTest {
 
     @Before
     public void setup() {
-        webDriver = WebDriverFactory.getWebDriver(BROUSER);
-        webDriver.get("https://stellarburgers.nomoreparties.site");
+        super.setup();
         ConstructorPage constructorPage = new ConstructorPage(webDriver);
-
-        ConstructorPage.clickLoginToAccountButton();
-
-        new WebDriverWait(webDriver, ofSeconds(10)).until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/login"));
-
-        LoginPage loginPage = new LoginPage(webDriver);
-        loginPage.enterEmail("ordersuser@example.com");
-        loginPage.enterPassword("password123");
-        loginPage.clickLoginButton();
-
-        new WebDriverWait(webDriver, ofSeconds(20)).until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/"));
+        constructorPage.clickLoginToAccountButton();
+        login("ordersuser@example.com", "password123");
     }
 
     @Test
     public void OpenProfilePage() {
         ConstructorPage constructorPage = new ConstructorPage(webDriver);
-
-        ConstructorPage.clickProfileButton();
+        constructorPage.clickProfileButton();
 
         new WebDriverWait(webDriver, ofSeconds(10)).until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/account/profile"));
 
         ProfilePage profilePage = new ProfilePage(webDriver);
         // Проверка наличия кнопки "Оформить заказ"
-        boolean profileTextDisplayed = ProfilePage.isProfileTextDisplayed();
+        boolean profileTextDisplayed = profilePage.isProfileTextDisplayed();
         assertTrue(profileTextDisplayed);
     }
 
     @Test
     public void OpenConstructorFromProfilePage() {
-
         ConstructorPage constructorPage = new ConstructorPage(webDriver);
-
         constructorPage.clickProfileButton();
 
-        new WebDriverWait(webDriver, ofSeconds(10)).until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/account/profile"));
         ProfilePage profilePage = new ProfilePage(webDriver);
         profilePage.clickConstructorButton();
-
-        new WebDriverWait(webDriver, ofSeconds(20)).until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/"));
 
         boolean orderButtonDisplayed = constructorPage.isOrderButtonDisplayed();
         assertTrue(orderButtonDisplayed);
@@ -69,9 +48,7 @@ public class OpenProfileTest {
 
     @Test
     public void LogoutFromProfilePage() {
-
         ConstructorPage constructorPage = new ConstructorPage(webDriver);
-
         constructorPage.clickProfileButton();
 
         new WebDriverWait(webDriver, ofSeconds(10)).until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/account/profile"));
@@ -79,13 +56,8 @@ public class OpenProfileTest {
         profilePage.clickLogoutButton();
 
         new WebDriverWait(webDriver, ofSeconds(20)).until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/login"));
-
         LoginPage loginPage = new LoginPage(webDriver);
         boolean loginButtonDisplayed = loginPage.isLoginButtonDisplayed();
         assertTrue(loginButtonDisplayed);
-    }
-    @After
-    public void tearDown() {
-        webDriver.quit();
     }
 }

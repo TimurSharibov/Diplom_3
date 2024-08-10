@@ -1,5 +1,6 @@
 package test;
 
+import io.qameta.allure.junit4.DisplayName;
 import utils.WebDriverFactory;
 import org.junit.After;
 import org.junit.Before;
@@ -30,6 +31,7 @@ public class RegistrationTest {
     }
 
     @Test
+    @DisplayName("Регистрация с корректными данными")
     public void RegistrationWithCorrectData() {
         RegistrationPage registrationPage = new RegistrationPage(webDriver);
 
@@ -51,10 +53,11 @@ public class RegistrationTest {
         // Проверка наличия кнопки "Оформить заказ"
         boolean orderButtonDisplayed = constructorPage.isOrderButtonDisplayed();
         assertTrue(orderButtonDisplayed);
-//        deleteUser();
+
     }
 
     @Test
+    @DisplayName("Регистрация с не корректным паролем")
     public void RegistrationWithIncorrectPassword() {
         RegistrationPage registrationPage = new RegistrationPage(webDriver);
 

@@ -22,16 +22,12 @@ public class RegistrationPage {
     }
 
 
-
     @Step("Ввод имени: {userName}")
     public void enterName(String userName) {
         WebElement nameInput = new WebDriverWait(webDriver, ofSeconds(20))
                 .until(ExpectedConditions.elementToBeClickable(nameInputLocator));
         nameInput.sendKeys(userName);
     }
-
-
-
 
 
     @Step("Ввод email: {userEmail}")

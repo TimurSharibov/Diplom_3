@@ -1,5 +1,6 @@
 package test;
 
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -22,6 +23,7 @@ public class OpenProfileTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Переход в профиль по клику на «Личный кабинет»")
     public void OpenProfilePage() {
         ConstructorPage constructorPage = new ConstructorPage(webDriver);
         constructorPage.clickProfileButton();
@@ -29,12 +31,13 @@ public class OpenProfileTest extends BaseTest {
         new WebDriverWait(webDriver, ofSeconds(10)).until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/account/profile"));
 
         ProfilePage profilePage = new ProfilePage(webDriver);
-        // Проверка наличия кнопки "Оформить заказ"
+        // Проверка наличия текста "Профиль"
         boolean profileTextDisplayed = profilePage.isProfileTextDisplayed();
         assertTrue(profileTextDisplayed);
     }
 
     @Test
+    @DisplayName("Переход из личного кабинета в конструктор")
     public void OpenConstructorFromProfilePage() {
         ConstructorPage constructorPage = new ConstructorPage(webDriver);
         constructorPage.clickProfileButton();
@@ -47,6 +50,7 @@ public class OpenProfileTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Выход из аккаунта по кнопке «Выйти» в личном кабинете.")
     public void LogoutFromProfilePage() {
         ConstructorPage constructorPage = new ConstructorPage(webDriver);
         constructorPage.clickProfileButton();

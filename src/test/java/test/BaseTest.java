@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 import static java.time.Duration.ofSeconds;
 
 public class BaseTest {
@@ -17,6 +19,7 @@ public class BaseTest {
     @Before
     public void setup() {
         webDriver = WebDriverFactory.getWebDriver(BROWSER);
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); // Установка неявного ожидания
         webDriver.get("https://stellarburgers.nomoreparties.site");
     }
 
